@@ -8,6 +8,7 @@ const Signup = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -24,6 +25,7 @@ const Signup = () => {
                 const errorCode = error.code
                 const errorMessage = error.message
                 console.log(errorCode, errorMessage)
+                setError(errorMessage)
                 // ..
             })
     }
@@ -46,7 +48,7 @@ const Signup = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                     placeholder="you@grinnell.edu"
-                                    pattern="^[a-zA-Z0-9._%+-]+@grinnell\.edu$"
+                                    pattern="[a-zA-Z0-9._%+-]+@grinnell\.edu"
                                     title="Please enter a valid @grinnell.edu email address"
                                 />
                             </div>
@@ -66,11 +68,12 @@ const Signup = () => {
                             </div>
 
                             <button type="submit">Sign up</button>
+                            {error && <p style={{ color: 'red' }}>{error}</p>}
                         </form>
 
                         <p>
                             Already have an account?{' '}
-                            <NavLink to="/login">Sign in</NavLink>
+                            <NavLink to="/signin">Sign in</NavLink>
                         </p>
                     </div>
                 </div>
