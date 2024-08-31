@@ -6,6 +6,7 @@ const HomePage = () => {
         <div>
             <h1>Welcome to Grinnell College's Mentorship Matching App</h1>
             <nav>
+                <Link to="/">HomePage</Link>
                 <Link to="/signup">Sign Up</Link>
                 <Link to="/signin">Sign In</Link>
             </nav>
