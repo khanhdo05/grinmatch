@@ -25,4 +25,6 @@ yarn-error.log*
 
 .idea/
 
+*.xml
+
 
