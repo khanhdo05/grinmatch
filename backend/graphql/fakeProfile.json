@@ -1,0 +1,15 @@
+{
+  "Users":[
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "pronouns": "he/him",
+      "email": "johndoe@grinnell.edu",
+      "startYear": 2020,
+      "endYear": 2024,
+      "major": "Computer Science",
+      "alumni": true,
+      "industry": "Software Engineering"
+    }
+  ]
+}
