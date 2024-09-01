@@ -1,3 +1,53 @@
+# Frontend for GrinMatch App
+
+## Overview
+
+This project contains the frontend logic for the GrinMatch App. It is built using Firebase Auth with JavaScript.
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Configuration](#configuration)
+
+## Prerequisites
+
+    Make sure you have [pnpm](https://pnpm.io/) installed. If not, you can install it via npm:
+
+    ```bash
+    npm install -g pnpm
+    ```
+
+    Then, install the project dependencies:
+
+    ```bash
+    pnpm install
+    ```
+
+## Configuration
+
+1. **Create a `.env` file:**
+
+   Create a `.env` file in the root directory of the project and add your Firebase configuration values:
+
+    ```env
+    REACT_APP_FIREBASE_API_KEY=your-api-key
+    REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+    REACT_APP_FIREBASE_DATABASE_URL=https://grinmatch-f46fc-default-rtdb.firebaseio.com
+    REACT_APP_FIREBASE_PROJECT_ID=grinmatch-f46fc
+    REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+    REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+    REACT_APP_FIREBASE_APP_ID=your-app-id
+    ```
+
+2. **Ensure `.env` is in `.gitignore`:**
+
+   Make sure your `.env` file is listed in your `.gitignore` to avoid exposing sensitive information:
+
+    ```bash
+    # .gitignore
+    .env
+    ```
+   
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

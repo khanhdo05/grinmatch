@@ -6,18 +6,10 @@ This project contains the backend logic for the GrinMatch App. It is built using
 
 ## Table of Contents
 
-- [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
 - [Deployment](#deployment)
 - [Testing](#testing)
-
-## Features
-
-- User authentication and profile management
-- Real-time messaging
-- Integration with Firestore for data storage
-- Environment variable management
 
 ## Prerequisites
 
@@ -28,6 +20,7 @@ Before you begin, ensure you have the following installed:
 - [pnpm](https://pnpm.io/) (use pnpm for package management)
 
 ## Setup
+
 - Create a .env file in the functions/ directory to manage your environment variables.
 ```.dotenv
 FIREBASE_TYPE=service_account
@@ -42,7 +35,14 @@ FIREBASE_AUTH_PROVIDER_CERT_URL=https://www.googleapis.com/oauth2/v1/certs
 FIREBASE_CLIENT_CERT_URL=https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-q044n%40grinmatch-f46fc.iam.gserviceaccount.com
 DATABASE_URL=https://grinmatch-f46fc-default-rtdb.firebaseio.com
 ```
+
+- Install dependencies
+```
+pnpm i
+```
+
 ## Deployment
+
 - Deploy functions and hosting
 ```
 firebase deploy --only functions
