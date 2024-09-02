@@ -94,6 +94,12 @@ const Signup = () => {
                                     required
                                     placeholder="Retype Password"
                                 />
+                                {password !== retypePassword &&
+                                    retypePassword && (
+                                        <p style={{ color: 'red' }}>
+                                            Password must match!
+                                        </p>
+                                    )}
                             </div>
 
                             <button
