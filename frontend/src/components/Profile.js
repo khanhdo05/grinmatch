@@ -1,12 +1,11 @@
-import React from 'react'
-import { signOut } from 'firebase/auth'
-import { auth } from '../configuration'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthProvider'
 const Profile = () => {
     const navigate = useNavigate()
-
+    const { logOut, loading } = useContext(AuthContext)
     const handleSignOut = () => {
-        signOut(auth)
+        logOut()
             .then(() => {
                 // Sign-out successful.
                 navigate('/')
@@ -17,7 +16,9 @@ const Profile = () => {
             })
     }
 
-    return (
+    return loading ? (
+        <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
+    ) : (
         <>
             <nav>
                 <p>Profile</p>

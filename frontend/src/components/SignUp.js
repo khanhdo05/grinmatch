@@ -1,19 +1,30 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../configuration'
+import { AuthContext } from '../context/AuthProvider'
 
 const Signup = () => {
     const navigate = useNavigate()
-
-    const [email, setEmail] = useState('')
+    const { createUser, user, loading } = useContext(AuthContext)
     const [password, setPassword] = useState('')
+    const [retypePassword, setRetypePassword] = useState('')
     const [error, setError] = useState('')
+
+    // If authentication is still loading, display a loading indicator
+    if (loading) {
+        return (
+            <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
+        )
+    }
+
+    // If the user is already authenticated, redirect to the home page
+    if (user) {
+        navigate('/profile')
+    }
 
     const onSubmit = async (e) => {
         e.preventDefault()
-
-        await createUserWithEmailAndPassword(auth, email, password)
+        const email = e.target.email.value
+        await createUser(email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user
@@ -28,6 +39,7 @@ const Signup = () => {
                 setError(errorMessage)
                 // ..
             })
+        e.target.reset()
     }
 
     return (
@@ -42,10 +54,9 @@ const Signup = () => {
                                     Email address
                                 </label>
                                 <input
+                                    id="email-address"
+                                    name="email"
                                     type="email"
-                                    label="Email address"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
                                     required
                                     placeholder="you@grinnell.edu"
                                     pattern="[a-zA-Z0-9._%+-]+@grinnell\.edu"
@@ -56,8 +67,9 @@ const Signup = () => {
                             <div>
                                 <label htmlFor="password">Password</label>
                                 <input
+                                    id="password"
+                                    name="password"
                                     type="password"
-                                    label="Create password"
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)
@@ -67,7 +79,29 @@ const Signup = () => {
                                 />
                             </div>
 
-                            <button type="submit">Sign up</button>
+                            <div>
+                                <label htmlFor="retypePassword">
+                                    Retype your password
+                                </label>
+                                <input
+                                    id="retype-password"
+                                    name="password"
+                                    type="password"
+                                    value={retypePassword}
+                                    onChange={(e) =>
+                                        setRetypePassword(e.target.value)
+                                    }
+                                    required
+                                    placeholder="Retype Password"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={password !== retypePassword}
+                            >
+                                Sign up
+                            </button>
                             {error && <p style={{ color: 'red' }}>{error}</p>}
                         </form>
 
