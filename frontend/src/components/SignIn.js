@@ -1,20 +1,32 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
-    signInWithEmailAndPassword,
     sendPasswordResetEmail,
 } from 'firebase/auth'
 import { auth } from '../configuration'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthProvider'
 
 const SignIn = () => {
     const navigate = useNavigate()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const { signIn, loading, user } = useContext(AuthContext);
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
 
-    const handleResetPassword = async () => {
+    // If authentication is still loading, display a loading indicator
+    if (loading) {
+        return (
+            <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
+        );
+    }
+
+    // If the user is already authenticated, redirect to the profile page
+    if (user) {
+        navigate("/profile");
+    }
+
+    const handleResetPassword = async (e) => {
         try {
+            const email = e.target.email.value;
             await sendPasswordResetEmail(auth, email)
             setMessage('Password reset email sent! Check your inbox.')
             setError('')
@@ -24,9 +36,11 @@ const SignIn = () => {
         }
     }
 
-    const onSignIn = (e) => {
+    const onSignIn = async (e) => {
         e.preventDefault()
-        signInWithEmailAndPassword(auth, email, password)
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        signIn(email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user
@@ -61,7 +75,6 @@ const SignIn = () => {
                                     placeholder="you@grinnell.edu"
                                     pattern="[a-zA-Z0-9._%+-]+@grinnell\.edu"
                                     title="Please enter a valid @grinnell.edu email address"
-                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
 
@@ -73,9 +86,6 @@ const SignIn = () => {
                                     type="password"
                                     required
                                     placeholder="Password"
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
                                 />
                             </div>
 
