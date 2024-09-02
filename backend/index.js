@@ -11,6 +11,10 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.get('/', (req, res) => {
+    // root route http://localhost:4000/
+    res.send('Hello World!')
+})
 // Setup GraphQL Server
 const server = new ApolloServer({
     typeDefs,

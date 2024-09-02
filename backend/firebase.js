@@ -1,6 +1,6 @@
+// Firebase Auth
 const admin = require('firebase-admin')
 require('dotenv').config()
-const firebase = require('firebase-admin')
 
 const serviceAccount = {
     type: process.env.FIREBASE_TYPE,
@@ -15,16 +15,10 @@ const serviceAccount = {
     client_x509_cert_url: process.env.FIREBASE_CLIENT_CERT_URL,
 }
 
-firebase.initializeApp({
-    credential: firebase.credential.cert(serviceAccount),
-})
-
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: process.env.FIREBASE_DATABASE_URL,
 })
 
-const db = admin.firestore()
 const auth = admin.auth()
 
-module.exports = { db, auth }
+module.exports = { auth }

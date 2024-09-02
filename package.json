@@ -1,0 +1,28 @@
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start:frontend": "cd frontend && pnpm start",
+    "start:backend": "cd backend && pnpm start",
+    "start": "pnpm run start:frontend & pnpm run start:backend",
+    "install:all": "pnpm install && pnpm install --prefix frontend && pnpm install --prefix backend",
+    "build:frontend": "cd frontend && pnpm build",
+    "lint:frontend": "cd frontend && pnpm lint",
+    "lint:backend": "cd backend && pnpm lint",
+    "lint": "pnpm run lint:frontend && pnpm run lint:backend",
+    "test:frontend": "cd frontend && pnpm test",
+    "test:backend": "cd backend && pnpm test",
+    "test": "pnpm run test:frontend && pnpm run test:backend"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "concurrently": "^7.6.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ]
+  }
+}
