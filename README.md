@@ -1,5 +1,7 @@
 # GrinMatch
 
+[![Build](https://github.com/khanhdo05/grinmatch/actions/workflows/main.yml/badge.svg)](https://github.com/khanhdo05/grinmatch/actions/workflows/main.yml)
+
 GrinMatch is a web application designed to connect current students with alumni for mentorship and networking opportunities. It provides a platform for students and alumni to engage in meaningful connections and foster professional growth.
 
 ## Tech Stack - MERN
