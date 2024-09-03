@@ -1,9 +1,7 @@
-const express = require('express')
-const cors = require('cors')
-const { ApolloServer } = require('apollo-server-express')
-const { typeDefs, resolvers } = require('./graphql/schema')
-const { auth } = require('./firebase')
-const dotenv = require('dotenv')
+import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import authRoutes from './routes/auth.routes.js'
 
 dotenv.config()
 
@@ -15,23 +13,7 @@ app.get('/', (req, res) => {
     // root route http://localhost:4000/
     res.send('Hello World!')
 })
-// Setup GraphQL Server
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: ({ req }) => {
-        const token = req.headers.authorization || ''
-        return { token, auth }
-    },
-})
 
-server.start().then(() => {
-    server.applyMiddleware({ app })
-
-    // Start the server
-    app.listen({ port: process.env.PORT || 4000 }, () =>
-        console.log(
-            `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
-        )
-    )
-})
+app.use('/api/auth', authRoutes)
+const PORT = process.env.PORT || 4000
+app.listen(PORT, () => console.log(`🚀 Server ready at http://localhost:4000`))
